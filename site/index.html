@@ -19,7 +19,7 @@
 </div></section>
 <script src="index.js"></script>
 <script>
-const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":17362344,"index.wasm":1601069},"focusCanvas":true,"gdextensionLibs":["cnc_manifold_web.wasm"],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":17362536,"index.wasm":1601069},"focusCanvas":true,"gdextensionLibs":["cnc_manifold_web.wasm"],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
 const loading=document.getElementById('loading'),bar=document.getElementById('loading-progress'),detail=document.getElementById('loading-detail'),message=document.getElementById('loading-message'),retry=document.getElementById('retry');
 let engineReady=false,workshopReady=false,failed=false;
 function finish(){if(!engineReady||!workshopReady||failed)return;requestAnimationFrame(()=>requestAnimationFrame(()=>{loading.classList.add('done');setTimeout(()=>loading.remove(),260);}));}
