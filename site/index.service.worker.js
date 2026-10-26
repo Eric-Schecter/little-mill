@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1793006309|2781669';
+const CACHE_VERSION = '1793007197|4792562';
 /** @type {string} */
 const CACHE_PREFIX = '切削工坊 · First Cut-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
