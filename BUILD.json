@@ -7,21 +7,22 @@
   "clipper2": "a6e7294703ae329576462f9471b356971f53010d",
   "wasm_sha256": "07dc5b3bd8fe093d563ffd2e24d2715f235b21a023fbe58db6dc3a9ada8fbef8",
   "runtime_files": {
-    "index.apple-touch-icon.png": "01d4f63e525941e06ce74f5187dad030d20a8d52a07ce365ae4e94af97a3b1f5",
+    "index.apple-touch-icon.png": "b727face8f78c37926efc4bc575d6200852f0da65f2eb7500504e5f7b6235562",
     "index.wasm": "eb7ab9dcb2c2c484f4dca0acaad466b7fd8448fb86a0a552b5c3e5291952115f",
-    "index.icon.png": "ad3c35ad0facf487c618204bd98db543034fc95224eadc7f08c7a9ff38d5b3b5",
+    "index.icon.png": "43059e59f84f5c573948c5de05c275d1e94092434f107f1ebd622bb0302d3969",
     "index.html": "67f0047882ad0149a8b20a2be09e9612280dfed5c0688212b63560a0fb576e0b",
-    "index.png": "3cb4495c0b98dfbe4b663cbf2b6836473572339beb66d902367893162a70be0e",
+    "index.png": "a93b5c92bb8bae305cb0c7f4d38ac92fb06e7a0013af62ca2681b6fb08b7ccb9",
     "index.offline.html": "8ca7e6c5bcbaf924031ee1173c995bf19fff17d7459b87a1d2360d48e5536c96",
     "cnc_manifold_web.wasm": "07dc5b3bd8fe093d563ffd2e24d2715f235b21a023fbe58db6dc3a9ada8fbef8",
-    "index.512x512.png": "b8950bb1b80225e332507d01b9f2212dbb604f0a2ac720a2e4a0da2a785fc37d",
+    "index.512x512.png": "a93b5c92bb8bae305cb0c7f4d38ac92fb06e7a0013af62ca2681b6fb08b7ccb9",
     "index.service.worker.js": "58cb9d3fa830e90d41327b482b61b50e8ba587c651d0d3b48c307a7c8034814e",
     "index.audio.worklet.js": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
-    "index.144x144.png": "1b42cde46e1ae4d1019bffc37f37c3dfaa106763a9f677c20fac1c11a95a4cf6",
+    "index.144x144.png": "3ced73316a679dfa6dad55d5453a7f979f3c5009e7c76786c14898a67aa20744",
     "index.js": "878c9ae7fb3c27ce886faea8da0670dc1a97fb93930fac4b433a1bb56e662d3a",
     "index.audio.position.worklet.js": "be33985bc7160d6bf9646f259cd86b259cd67b02ccb297ee5c44f8ac84327bc8",
+    "index.manifest.json": "12c3812c644748bb3e145ed2466bc3b26637d751e1999cd671248eec6ebf3c3f",
     "index.side.wasm": "c99712114cbcedd876fb841173d79bc3a9dbca8130b343ebbbaf2c0a361ad394",
-    "index.180x180.png": "c0d84139dec898418bade6f3250bd423b31c073477271d26b54cf5dcc4909875",
+    "index.180x180.png": "b727face8f78c37926efc4bc575d6200852f0da65f2eb7500504e5f7b6235562",
     "index.pck": "d8f766abb9c4e945c2c322867fc03dbb37a8714c5512603b10bff4c3ff278bbb"
   }
 }
