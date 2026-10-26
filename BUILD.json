@@ -10,12 +10,12 @@
     "index.apple-touch-icon.png": "b727face8f78c37926efc4bc575d6200852f0da65f2eb7500504e5f7b6235562",
     "index.wasm": "eb7ab9dcb2c2c484f4dca0acaad466b7fd8448fb86a0a552b5c3e5291952115f",
     "index.icon.png": "43059e59f84f5c573948c5de05c275d1e94092434f107f1ebd622bb0302d3969",
-    "index.html": "c81193c4ce4ac0df114be65c527fb928a783ce0f0630d2739e165240dcc448be",
+    "index.html": "d2d48d516760ef182803e880d464f39e3a5e5abd51cb5ef394499fc74e8bd264",
     "index.png": "a93b5c92bb8bae305cb0c7f4d38ac92fb06e7a0013af62ca2681b6fb08b7ccb9",
     "index.offline.html": "8ca7e6c5bcbaf924031ee1173c995bf19fff17d7459b87a1d2360d48e5536c96",
     "cnc_manifold_web.wasm": "07dc5b3bd8fe093d563ffd2e24d2715f235b21a023fbe58db6dc3a9ada8fbef8",
     "index.512x512.png": "a93b5c92bb8bae305cb0c7f4d38ac92fb06e7a0013af62ca2681b6fb08b7ccb9",
-    "index.service.worker.js": "8a8a8e1bc2ff9d7eae4088e9ae36bf9842a0d5ccaf102924673f9ec3327acc23",
+    "index.service.worker.js": "729e80ae1c64615de0d573dba4b69afda7ce7cef12fc4468beda817a8fdb6893",
     "index.audio.worklet.js": "5b476a9c9ce642c0ee4256436d1bc31d9c38f868aca0f9a8e2a57c18d2dec2a3",
     "index.144x144.png": "3ced73316a679dfa6dad55d5453a7f979f3c5009e7c76786c14898a67aa20744",
     "index.js": "878c9ae7fb3c27ce886faea8da0670dc1a97fb93930fac4b433a1bb56e662d3a",
@@ -23,6 +23,6 @@
     "index.manifest.json": "81732b83e77e2b9ef35962c2b28315815dae4e7b1cbe94deb7a997d4ebdb144b",
     "index.side.wasm": "c99712114cbcedd876fb841173d79bc3a9dbca8130b343ebbbaf2c0a361ad394",
     "index.180x180.png": "b727face8f78c37926efc4bc575d6200852f0da65f2eb7500504e5f7b6235562",
-    "index.pck": "c49aaa672fa1d9e1c60b4dc46f8e850a18a8c74d0b74a38629fd0535151dffec"
+    "index.pck": "cccc0f517fa7295da318b22683804b8a0ed570e97bf785ca61473be9f9c02464"
   }
 }
