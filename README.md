@@ -4,6 +4,8 @@ A browser-based manufacturing simulation demo built with Godot.
 
 [Try the demo](https://eric-schecter.github.io/little-mill/)
 
+![Little Mill running in the browser — process planning and toolpath preview](assets/screenshot.png)
+
 ## Features
 
 - Automatic process planning and toolpath generation for the built-in STEP sample.
