@@ -26,7 +26,35 @@ function finish(){if(!engineReady||!workshopReady||failed)return;requestAnimatio
 window.addEventListener('workshop-ready',()=>{workshopReady=true;finish();});
 function failure(error){failed=true;message.textContent='工作台暂时没能打开';detail.textContent=error instanceof Error?error.message:String(error);bar.hidden=true;retry.hidden=false;console.error(error);}
 retry.onclick=()=>location.reload();
+// Check before loading the engine so a waiting worker cannot leave us using
+// an older cached PCK. Only this starting tab reloads; running tabs are kept.
+async function updateWorkshopCache(){
+ if(!config.serviceWorker||!('serviceWorker' in navigator))return false;
+ const controlled=!!navigator.serviceWorker.controller;
+ const registration=await navigator.serviceWorker.register(config.serviceWorker,{updateViaCache:'none'});
+ await registration.update();
+ if(!controlled)return false;
+ if(registration.installing){
+  const worker=registration.installing;
+  message.textContent='正在检查工作台更新';
+  await new Promise((resolve,reject)=>{
+   const timer=setTimeout(()=>{worker.removeEventListener('statechange',changed);reject(new Error('更新下载超时，请重新加载'));},90000);
+   function changed(){if(worker.state==='installed'||worker.state==='redundant'){clearTimeout(timer);worker.removeEventListener('statechange',changed);resolve();}}
+   worker.addEventListener('statechange',changed);changed();
+  });
+ }
+ if(!registration.waiting)return false;
+ message.textContent='正在更新工作台';detail.textContent='新版本已就绪，马上重新打开…';
+ await new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>{navigator.serviceWorker.removeEventListener('controllerchange',changed);reject(new Error('更新切换超时，请关闭此标签页后重新打开'));},30000);
+  function changed(){clearTimeout(timer);resolve();}
+  navigator.serviceWorker.addEventListener('controllerchange',changed,{once:true});
+  registration.waiting.postMessage('claim');
+ });
+ location.reload();return true;
+}
 async function startWorkshop(){
+ if(await updateWorkshopCache())return;
  const engine=new Engine(config);
  // GitHub Pages has no custom response headers. Godot's bundled worker adds
  // the required isolation headers within this project's own URL scope.
