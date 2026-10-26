@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>小小制造所</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2217%22%20fill%3D%22%23e5eeea%22%2F%3E%3Cpath%20d%3D%22M12%2028%2032%2017%2052%2028%2032%2040Z%22%20fill%3D%22%23e7c68e%22%2F%3E%3Cpath%20d%3D%22M12%2028V48L32%2059V40Z%22%20fill%3D%22%23cba976%22%2F%3E%3Cpath%20d%3D%22M32%2040%2052%2028V48L32%2059Z%22%20fill%3D%22%23dbb985%22%2F%3E%3Cpath%20d%3D%22M32%207V27%22%20stroke%3D%22%23397e73%22%20stroke-width%3D%227%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M28%2025V32Q32%2037%2036%2032V25%22%20fill%3D%22%2391b5aa%22%2F%3E%3C%2Fsvg%3E">
+<style>
+*{box-sizing:border-box}html,body{width:100%;height:100%;margin:0;overflow:hidden;background:#e5eeea;color:#283f3c;font:15px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}#canvas{position:fixed;inset:0;width:100%;height:100%;display:block;outline:none;touch-action:none}#loading{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 38%,#f5f8ee,#e5eeea 70%);transition:opacity .25s}#loading.done{opacity:0;pointer-events:none}.card{text-align:center;width:min(360px,85vw);padding:36px 30px;border-radius:30px;background:#fbfcf8e6;box-shadow:0 12px 55px #397e7310;border:1px solid #fff}.mark{width:88px;height:88px;margin:0 auto 22px;display:block;animation:bob 2.6s ease-in-out infinite}h1{font-size:27px;font-weight:550;letter-spacing:2px;margin:0 0 14px}p{color:#647973;line-height:1.7;margin:0 0 22px}progress{width:100%;height:9px;display:block;border:0;appearance:none;border-radius:10px;overflow:hidden;background:#e5eee7;accent-color:#82b2a0}progress::-webkit-progress-bar{background:#e5eee7;border-radius:10px}progress::-webkit-progress-value{background:#82b2a0;border-radius:10px;transition:width .15s}progress::-moz-progress-bar{background:#82b2a0;border-radius:10px}#loading-detail{display:block;font-size:12px;color:#647973;margin-top:12px;min-height:18px}#retry{border:0;background:#397e73;color:#fff;border-radius:12px;padding:11px 22px;font:inherit;margin-top:18px;cursor:pointer}#retry[hidden]{display:none}@keyframes bob{50%{transform:translateY(-5px) rotate(-3deg)}}@media(prefers-reduced-motion:reduce){.mark{animation:none}#loading{transition:none}}
+</style>
+<link rel="manifest" href="index.manifest.json">
+
+</head>
+<body>
+<canvas id="canvas" aria-label="小小制造所三维工作台">浏览器需要支持 Canvas 才能打开工作台。</canvas>
+<section id="loading" role="status" aria-live="polite"><div class="card">
+<svg class="mark" viewBox="0 0 100 100" fill="none" aria-hidden="true"><rect x="5" y="5" width="90" height="90" rx="27" fill="#e7efe4"/><path d="M23 43 50 28 77 43 50 59Z" fill="#e7c68e"/><path d="M23 43V70L50 85V59Z" fill="#cba976"/><path d="M50 59 77 43V70L50 85Z" fill="#dbb985"/><path d="M50 16V42" stroke="#789e96" stroke-width="9" stroke-linecap="round"/><path d="M45 40V48Q50 55 55 48V40" fill="#91b5aa"/><path d="m70 20 2-5m7 13 5-1" stroke="#b9cda9" stroke-width="3" stroke-linecap="round"/></svg>
+<h1>小小制造所</h1><p id="loading-message">正在准备你的工作台</p><progress id="loading-progress" aria-label="工作台加载进度"></progress><span id="loading-detail">首次打开需要下载一些资源</span><button id="retry" hidden>重新加载</button>
+</div></section>
+<script src="index.js"></script>
+<script>
+const config={"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":17362344,"index.wasm":1601069},"focusCanvas":true,"gdextensionLibs":["cnc_manifold_web.wasm"],"godotPoolSize":4,"serviceWorker":"index.service.worker.js"};
+const loading=document.getElementById('loading'),bar=document.getElementById('loading-progress'),detail=document.getElementById('loading-detail'),message=document.getElementById('loading-message'),retry=document.getElementById('retry');
+let engineReady=false,workshopReady=false,failed=false;
+function finish(){if(!engineReady||!workshopReady||failed)return;requestAnimationFrame(()=>requestAnimationFrame(()=>{loading.classList.add('done');setTimeout(()=>loading.remove(),260);}));}
+window.addEventListener('workshop-ready',()=>{workshopReady=true;finish();});
+function failure(error){failed=true;message.textContent='工作台暂时没能打开';detail.textContent=error instanceof Error?error.message:String(error);bar.hidden=true;retry.hidden=false;console.error(error);}
+retry.onclick=()=>location.reload();
+async function startWorkshop(){
+ const engine=new Engine(config);
+ // GitHub Pages has no custom response headers. Godot's bundled worker adds
+ // the required isolation headers within this project's own URL scope.
+ if(config.serviceWorker&&config.ensureCrossOriginIsolationHeaders&&!window.crossOriginIsolated){
+  if(!('serviceWorker' in navigator))throw new Error('浏览器不支持工作台所需的 Service Worker');
+  message.textContent='首次布置工作台';detail.textContent='正在准备浏览器运行环境，请稍候…';
+  const registration=await engine.installServiceWorker();
+  const ready=await navigator.serviceWorker.ready;
+  if(!navigator.serviceWorker.controller){
+   await new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>{navigator.serviceWorker.removeEventListener('controllerchange',changed);reject(new Error('运行环境准备超时，请重新加载'));},90000);
+    function changed(){clearTimeout(timer);resolve();}
+    navigator.serviceWorker.addEventListener('controllerchange',changed,{once:true});
+    (registration.active||ready.active)?.postMessage('claim');
+   });
+  }
+  const key='little-mill-isolation:'+new URL(config.serviceWorker,location.href).pathname;
+  if(sessionStorage.getItem(key)==='retry')throw new Error('浏览器尚未启用所需的隔离环境，请关闭此标签页后重新打开');
+  sessionStorage.setItem(key,'retry');location.reload();return;
+ }
+ if(window.crossOriginIsolated){sessionStorage.removeItem('little-mill-isolation:'+new URL(config.serviceWorker||'index.service.worker.js',location.href).pathname);}
+ const missing=Engine.getMissingFeatures({threads:config.godotPoolSize>0});
+ if(missing.length)throw new Error('浏览器缺少所需功能：'+missing.join('、'));
+ await engine.startGame({onProgress:(current,total)=>{if(total>0){bar.max=total;bar.value=current;detail.textContent=current>=total?'资源已就绪，正在布置工作台…':`正在加载资源 · ${Math.floor(current/total*100)}%`;}else{bar.removeAttribute('value');detail.textContent='正在准备场景…';}}});
+ engineReady=true;message.textContent='正在布置工作台';finish();
+}
+startWorkshop().catch(failure);
+</script>
+</body></html>
+
